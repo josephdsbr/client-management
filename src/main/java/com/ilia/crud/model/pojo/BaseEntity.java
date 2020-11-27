@@ -17,8 +17,6 @@ import java.util.UUID;
 @SuperBuilder
 @MappedSuperclass
 public class BaseEntity {
-  protected static final long serialVersionUID = 1L;
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
