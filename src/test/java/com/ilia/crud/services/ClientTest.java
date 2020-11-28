@@ -15,7 +15,7 @@ import java.util.*;
 public class ClientTest extends CrudApplicationTests {
 
   @Test
-  public void create_user() {
+  public void create_client() {
     ClientDTO clientDTO = ClientUtil.mountClientDTO();
     Client client = this.clientService.createClient(clientDTO);
     Assert.assertTrue(Objects.nonNull(client.getName()));

@@ -19,3 +19,6 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
+jwt:
+  secret: b837becb-3038-422c-b535-01815e8a6228
+  expiration: 18000

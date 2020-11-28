@@ -2,6 +2,7 @@ package com.ilia.crud;
 
 import com.ilia.crud.services.CityService;
 import com.ilia.crud.services.ClientService;
+import com.ilia.crud.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class CrudApplicationTests {
 
 	@Autowired
 	protected CityService cityService;
+
+	@Autowired
+	protected UserService userService;
 
 	@Test
 	void contextLoads() {

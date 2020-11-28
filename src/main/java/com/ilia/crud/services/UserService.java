@@ -1,13 +1,11 @@
 package com.ilia.crud.services;
 
-import com.ilia.crud.exceptions.CustomException;
 import com.ilia.crud.model.dtos.UserDTO;
 import com.ilia.crud.model.pojo.User;
 import com.ilia.crud.repository.IUserRepository;
 import com.ilia.crud.util.CustomExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
