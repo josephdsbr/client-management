@@ -29,3 +29,6 @@ spring:
     test-while-idle: true
     time-between-eviction-runs-millis: 3600000
     validation-query: select 1
+jwt:
+  secret: b837becb-3038-422c-b535-01815e8a6228
+  expiration: 18000
