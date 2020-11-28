@@ -1,8 +1,8 @@
 package com.ilia.crud.controller;
 
-import com.ilia.crud.model.dtos.ClientDTO;
-import com.ilia.crud.model.pojo.Client;
-import com.ilia.crud.services.ClientService;
+import com.ilia.crud.model.dtos.CityDTO;
+import com.ilia.crud.model.pojo.City;
+import com.ilia.crud.services.CityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +11,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/city")
 @Slf4j
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
-public class ClientController {
-  private final ClientService clientService;
+public class CityController {
+  private final CityService cityService;
 
   @PostMapping
-  public ResponseEntity<Client> handleUserCreation(
-      @RequestBody ClientDTO clientDTO
+  public ResponseEntity<City> handleUserCreation(
+      @RequestBody CityDTO cityDTO
       ) {
     try {
-      Client client = this.clientService.createClient(clientDTO);
-      return new ResponseEntity<>(client, HttpStatus.OK);
+      City city = this.cityService.createCity(cityDTO);
+      return new ResponseEntity<>(city, HttpStatus.CREATED);
     } catch (Exception exception) {
       return new ResponseEntity(exception, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
   }
-
-
 }

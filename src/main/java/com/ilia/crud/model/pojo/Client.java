@@ -10,6 +10,7 @@ import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -32,10 +33,16 @@ public class Client extends BaseEntity {
   private LocalDate birthDate;
 
   @Column(nullable = false)
-  @Formula(value = "date_part(‘year’, age(birthDate))")
-  private int age;
+  private long age;
 
   @OneToOne
   @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
   private City city;
+
+  @PrePersist
+  @PreUpdate
+  protected void handleAge() {
+    LocalDate today = LocalDate.now();
+    this.age = this.birthDate.until(today, ChronoUnit.YEARS);
+  }
 }

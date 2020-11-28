@@ -6,6 +6,6 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: org.postgresql.Driver
-    url: postgres://gjnnancy:kn4Z9D0RoYn_6q8iUhI9cf2GKrNOgcoO@suleiman.db.elephantsql.com:5432/gjnnancy
+    url: jdbc:postgres://gjnnancy:kn4Z9D0RoYn_6q8iUhI9cf2GKrNOgcoO@suleiman.db.elephantsql.com:5432/gjnnancy
     username: gjnnancy
     password: 'kn4Z9D0RoYn_6q8iUhI9cf2GKrNOgcoO'

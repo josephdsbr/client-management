@@ -7,8 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -17,8 +16,16 @@ import javax.persistence.Entity;
 @SuperBuilder
 @Entity
 public class City extends BaseEntity {
-  @Column(nullable = false, unique = true)
-  private String name;
   @Column(nullable = false)
+  private String name;
+
+  @Column(nullable = false)
+  @Enumerated(value = EnumType.STRING)
   private StateEnum state;
+
+  @PrePersist
+  @PreUpdate
+  private void handleName() {
+    this.name = this.name.toUpperCase();
+  }
 }
