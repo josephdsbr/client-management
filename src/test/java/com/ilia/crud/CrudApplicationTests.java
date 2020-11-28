@@ -1,5 +1,6 @@
 package com.ilia.crud;
 
+import com.ilia.crud.services.CityService;
 import com.ilia.crud.services.ClientService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CrudApplicationTests {
 	@Autowired
 	protected ClientService clientService;
+
+	@Autowired
+	protected CityService cityService;
 
 	@Test
 	void contextLoads() {

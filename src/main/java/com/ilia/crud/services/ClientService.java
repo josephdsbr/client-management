@@ -1,16 +1,16 @@
 package com.ilia.crud.services;
 
 import com.ilia.crud.model.dtos.ClientDTO;
+import com.ilia.crud.model.dtos.ClientHandleNameDTO;
 import com.ilia.crud.model.pojo.City;
 import com.ilia.crud.model.pojo.Client;
 import com.ilia.crud.repository.IClientRepository;
+import com.ilia.crud.util.CustomExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +35,10 @@ public class ClientService {
 
   public List<Client> findByName(String name) {
     try {
-      return this.clientRepository.findAllByNameContaining(name).orElseGet(ArrayList::new);
+      return this.clientRepository.findAllByNameIgnoreCase(name).orElseGet(ArrayList::new);
     } catch (Exception exception) {
-      throw new RuntimeException(exception);
+      String message = "An error occurred in consulting database.";
+      throw CustomExceptionUtil.HandleGenericCustomException(Client.class, message, exception);
     }
   }
 
@@ -45,28 +46,31 @@ public class ClientService {
     try {
       return this.clientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     } catch (Exception exception) {
-      throw new RuntimeException(exception);
+      throw CustomExceptionUtil.HandleCustomEntityNotFoundException(Client.class, id, exception);
     }
   }
 
-  public Client deleteById(Long id) {
+  public Client removeByID(Long id) {
     try {
       Client client = this.clientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
       LocalDateTime today = LocalDateTime.now();
-      client.setLastUpdatedAt(today);
+      client.setRemovedAt(today);
       return this.clientRepository.save(client);
-    } catch (Exception exception) {
-      throw new RuntimeException(exception);
+    }
+    catch (EntityNotFoundException exception) {
+      throw CustomExceptionUtil.HandleCustomEntityNotFoundException(Client.class, id, exception);
     }
   }
 
-  public Client updateNameById(Long id, String name) {
+  public Client updateNameById(ClientHandleNameDTO clientHandleNameDTO) {
+    Long id = clientHandleNameDTO.getId();
+    String name = clientHandleNameDTO.getName();
     try {
       Client client = this.clientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
       client.setName(name);
       return client;
     } catch (EntityNotFoundException exception) {
-      throw new RuntimeException(exception);
+      throw CustomExceptionUtil.HandleCustomEntityNotFoundException(Client.class, id, exception);
     }
   }
 }
