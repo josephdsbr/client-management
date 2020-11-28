@@ -1,6 +1,7 @@
 package com.ilia.crud.util;
 
 import com.ilia.crud.exceptions.CustomException;
+import org.springframework.http.HttpStatus;
 
 public class CustomExceptionUtil {
   public static CustomException HandleGenericCustomException(Class<?> entity, Object message, Exception exception) {
@@ -8,6 +9,7 @@ public class CustomExceptionUtil {
         .message(message.toString())
         .details(exception.getMessage())
         .hint(entity.toGenericString())
+        .status(HttpStatus.BAD_REQUEST)
         .build();
   }
 
@@ -17,6 +19,7 @@ public class CustomExceptionUtil {
         .message(message)
         .details(exception.getMessage())
         .hint(entity.toGenericString())
+        .status(HttpStatus.NO_CONTENT)
         .build();
   }
 
@@ -26,6 +29,7 @@ public class CustomExceptionUtil {
     return CustomException.builder()
         .message(message)
         .hint(serializedClass)
+        .status(HttpStatus.ALREADY_REPORTED)
         .build();
   }
 }

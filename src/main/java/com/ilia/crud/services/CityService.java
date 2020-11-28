@@ -7,6 +7,7 @@ import com.ilia.crud.model.pojo.City;
 import com.ilia.crud.repository.ICityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class CityService {
       throw CustomException.builder()
           .message("City already registered")
           .details("The City you tried to register is already registered in the database")
+          .status(HttpStatus.ALREADY_REPORTED)
           .build();
     }
 
@@ -52,6 +54,7 @@ public class CityService {
           .message("Name or state must not be null")
           .details("You have send a request to search for name or state without specifing any of these paramteres")
           .nextActions("Remake the request specifying at least one of the parameters.")
+          .status(HttpStatus.BAD_REQUEST)
           .build();
     }
     return this.repository.findAllByNameIgnoreCaseOrState(name, state);

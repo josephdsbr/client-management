@@ -20,6 +20,6 @@ public class ExceptionInterceptor extends ResponseEntityExceptionHandler {
         .nextActions(exception.getNextActions())
         .support(exception.getSupport())
         .build();
-    return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    return new ResponseEntity<>(exceptionResponse, exception.getStatus());
   }
 }
