@@ -50,7 +50,13 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable()
         .authorizeRequests()
-          .antMatchers("/authenticate").permitAll()
+          .antMatchers("/authenticate", "index", "/css/*", "/js/*").permitAll()
+          .antMatchers("/v2/api-docs",
+              "/configuration/ui",
+              "/swagger-resources/**",
+              "/configuration/security",
+              "/swagger-ui.html",
+              "/webjars/**").permitAll()
           .antMatchers(HttpMethod.POST, "/user").permitAll()
         .anyRequest()
         .authenticated()
