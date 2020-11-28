@@ -26,7 +26,7 @@ public class ClientTest extends CrudApplicationTests {
     Long id = 10000L;
     Throwable exception = Assert.assertThrows(CustomException.class,
         () -> this.clientService.findById(id));
-    Assert.assertEquals(exception.getMessage(), String.format("Entity not found - ref.: %s", id));
+    Assert.assertEquals(exception.getMessage(), String.format("%s not found - ref.: %s", Client.class.getName(), id));
   }
 
   @Test
@@ -50,7 +50,7 @@ public class ClientTest extends CrudApplicationTests {
     Long id = 10000L;
     Throwable exception = Assert.assertThrows(CustomException.class,
         () -> this.clientService.removeByID(id));
-    Assert.assertEquals(exception.getMessage(), String.format("Entity not found - ref.: %s", id));
+    Assert.assertEquals(String.format("%s not found - ref.: %s", Client.class.getName(),id), exception.getMessage());
   }
 
   @Test
@@ -68,7 +68,7 @@ public class ClientTest extends CrudApplicationTests {
     ClientHandleNameDTO clientHandleNameDTO = ClientUtil.mountClientHandleNameDTO(id, name);
     Throwable exception = Assert.assertThrows(CustomException.class,
         () -> this.clientService.updateNameById(clientHandleNameDTO));
-    Assert.assertEquals(exception.getMessage(), String.format("Entity not found - ref.: %s", id));
+    Assert.assertEquals(exception.getMessage(), String.format("%s not found - ref.: %s", Client.class.getName(), id));
   }
 
 

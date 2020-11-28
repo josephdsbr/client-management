@@ -2,8 +2,6 @@ package com.ilia.crud.util;
 
 import com.ilia.crud.exceptions.CustomException;
 
-import java.util.Objects;
-
 public class CustomExceptionUtil {
   public static CustomException HandleGenericCustomException(Class<?> entity, Object message, Exception exception) {
     return CustomException.builder()
@@ -23,7 +21,7 @@ public class CustomExceptionUtil {
   }
 
   public static CustomException HandleCustomEntityAlreadyRegisteredException(Class<?> entity, Object reference) {
-    String serializedClass = entity.toGenericString();
+    String serializedClass = entity.getName();
     String message = String.format("%s already registered - ref.: %s", serializedClass, reference);
     return CustomException.builder()
         .message(message)

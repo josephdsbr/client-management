@@ -27,7 +27,7 @@ public class UserTest extends CrudApplicationTests {
     userDTO.setPassword("Teste");
     Throwable exception = Assert.assertThrows(CustomException.class,
         () -> this.userService.createUser(userDTO));
-    String message = String.format("%s already registered - ref.: %s", User.class.toGenericString(), userDTO.getEmail());
+    String message = String.format("%s already registered - ref.: %s", User.class.getName(), userDTO.getEmail());
     Assert.assertEquals(exception.getMessage(), message);
   }
 
